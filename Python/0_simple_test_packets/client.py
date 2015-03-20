@@ -24,11 +24,10 @@ def math_client():
             client_socket.send(data)
             data = client_socket.recv(RECV_BUFFER)
             print data"""
-        time.sleep(0.5);
         client_socket.send("Test Packet")
         data = client_socket.recv(RECV_BUFFER)
         print data
-
+        time.sleep(30);
 
 
 if __name__ == "__main__":

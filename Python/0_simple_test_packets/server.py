@@ -17,10 +17,11 @@ class Client:
 def handler(client):
     print "Accepted connection from: ", client.addr
 
+    # Este es el socket del cliente abierto en un thread
     while 1:
         data = client.socket.recv(RECV_BUFFER)
         print "Client " + str(client.code) + ": " + data
-        # send back the data
+        # Enviamos la informacion de vuelta al cliente
         client.socket.send(data)
 
     client.socket.close()
@@ -28,8 +29,8 @@ def handler(client):
 
 def math_server():
 
+    # Declaración del socket
     server_addr = (HOST, PORT)
-
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     server_socket.bind(server_addr)
@@ -37,12 +38,12 @@ def math_server():
 
     while 1:
         print "Server is listening for connections\n"
-        time.sleep(1)
         c = Client()
         c.code = len(SOCKET_LIST)+1
         c.socket, c.addr = server_socket.accept()
         SOCKET_LIST.append(c.socket)
         thread.start_new_thread(handler, (c,))
+        time.sleep(1)
 
     server_socket.close()
 
