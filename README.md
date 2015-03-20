@@ -1,3 +1,3 @@
 ## Arquitectura Cliente-Servor
 
-Ejemplos de diferentes implementacionesen diferentes lenguajes aplicando principios comunes.
+Ejemplos de diferentes implementaciones en diferentes lenguajes aplicando principios comunes.
