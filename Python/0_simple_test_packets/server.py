@@ -3,6 +3,8 @@ import socket
 import thread
 import sys
 import time
+import select
+import uuid
 
 HOST = '0.0.0.0'
 SOCKET_LIST = []
@@ -15,19 +17,29 @@ class Client:
 
 
 def handler(client):
+    """El handler maneja la conexión con cada socket individualmente"""
+
     print "Accepted connection from: ", client.addr
 
-    # Este es el socket del cliente abierto en un thread
+    # Este bucle se repite cada vez que se encuentran datos en el bufer
     while 1:
+
+        # Leemos tamaño del bufer del socket cliente hasta recibir algo
         data = client.socket.recv(RECV_BUFFER)
-        print "Client " + str(client.code) + ": " + data
-        # Enviamos la informacion de vuelta al cliente
-        client.socket.send(data)
 
-    client.socket.close()
+        # Enviamos la informacion al cliente otra vez, si éste no nos la
+        # devuelve es que se ha desconectado, entonces cerramos el socket
+        if not client.socket.send(data):
+            client.socket.close()
+            SOCKET_LIST.remove(client.socket)
+            print "Client " + client.code + " not found - Socket closed - Total clients: " + str(len(SOCKET_LIST))
+            break
+        else:
+            print "Client " + client.code + ": " + data + " - Total clients: " + str(len(SOCKET_LIST))
+    return
 
 
-def math_server():
+def server():
 
     # Declaración del socket
     server_addr = (HOST, PORT)
@@ -36,16 +48,23 @@ def math_server():
     server_socket.bind(server_addr)
     server_socket.listen(10)
 
+    print "Server is listening for connections\n"
     while 1:
-        print "Server is listening for connections\n"
+
+        # Esto ocurre antes de que se conecte un nuevo cliente
         c = Client()
-        c.code = len(SOCKET_LIST)+1
+        c.code = str(uuid.uuid4().fields[-1])[:5]
+
+        # En este momento aceptamos el socket
         c.socket, c.addr = server_socket.accept()
+
+        # Lo añadimos a una lista
         SOCKET_LIST.append(c.socket)
+
+        # Y lo lanzamos en un hilo para gestionar su conexión
         thread.start_new_thread(handler, (c,))
-        time.sleep(1)
 
     server_socket.close()
 
 if __name__ == "__main__":
-    sys.exit(math_server())
+    sys.exit(server())
