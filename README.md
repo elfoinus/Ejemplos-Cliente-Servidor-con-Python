@@ -13,5 +13,5 @@ Ejemplo muy sencillo de un servidor implementado en Python capaz de manejar vari
 * La gestión del socket de cada cliente se realiza en un hilo específico.
 * Cuando un cliente no responde un envío del servidor se cierra su socket.
 
-[![Imagen](https://github.com/hcosta/arquitectura-cliente-servidor/tree/master/Python/Screens/img1.png)](https://github.com/hcosta/arquitectura-cliente-servidor/tree/master/Python/Screens/img1.png)
-
+[![Imagen](https://github.com/hcosta/arquitectura-cliente-servidor/raw/master/Python/Screens/img1.png
+)](https://github.com/hcosta/arquitectura-cliente-servidor/raw/master/Python/Screens/img1.png)
