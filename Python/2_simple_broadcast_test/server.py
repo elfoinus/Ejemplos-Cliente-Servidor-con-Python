@@ -11,10 +11,8 @@ SOCKET_LIST = []
 RECV_BUFFER = 1024
 PORT = 9000
 
-
 class Client:
     pass
-
 
 def handler(client):
     """El handler maneja la conexión con cada socket individualmente"""

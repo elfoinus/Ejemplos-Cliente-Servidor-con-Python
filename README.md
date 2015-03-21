@@ -37,3 +37,18 @@ Ejemplo simple donde se crea un servidor capaz de solucionar varias operaciones 
 
 [![Imagen](https://github.com/hcosta/arquitectura-cliente-servidor/raw/master/Python/Screens/img2.png
 )](https://github.com/hcosta/arquitectura-cliente-servidor/raw/master/Python/Screens/img2.png)
+
+### [Simple positional broadcasting](https://github.com/hcosta/arquitectura-cliente-servidor/tree/master/Python/2_simple_broadcast_test)
+
+Ejemplo en el que los clientes envían al servidor una coordenada (x,y) cada ciertos segundos con una nueva posición. El servidor entonces hace un broadcast de la coordenada de cada cliente en todos los clientes. Es una idea a como podría funcionar una futura implementación de posicionamiento en un simple juego online.
+
+* Se guardan los clientes en una lista para saber la cantidad de clientes conectados.
+* A cada cliente se le otorga un identificador para diferenciarlo de los demás.
+* La gestión del socket de cada cliente se realiza en un hilo específico.
+* Cuando un cliente no responde o hay un error se cierra su socket.
+* Desde el cliente se envía una coordenada en dos valores de tipo **short**, cada uno de 2bytes empaquetados con la librería struct. Se hace desde un hilo individual que ejecuta una función recursiva que altera las posiciones x e y -1,0,+1 aleatoriamente cada vez que se envía.
+* El resto del cliente queda en espera de ir leyendo el buffer local (con el broadcast).
+* Para gestionar el broadcast el servidor envía el paquete a todos los clientes utilizando un loop, y si alguno no funcionale cierra el socket.
+
+[![Imagen](https://github.com/hcosta/arquitectura-cliente-servidor/raw/master/Python/Screens/img3.png
+)](https://github.com/hcosta/arquitectura-cliente-servidor/raw/master/Python/Screens/img3.png)
