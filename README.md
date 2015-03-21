@@ -30,7 +30,7 @@ Ejemplo simple donde se crea un servidor capaz de solucionar varias operaciones 
 	* El primer valor: Un short que ocupa 2 bytes.
 	* El segundo valor: Un short que ocupa 2 bytes.
 * Al final del paquete (pero fuera del buffer del struct) se adjunta **el comando**, una string de tamaño indeterminado indicando SUMA, RESTA, MULTIPLICACION o DIVISION. 
-* Es muy interesante ver como se envía la cadena de carecteres fuera de un buffer de bytes.
+* Es muy interesante ver como se envía la cadena de carecteres fuera de un buffer de bytes, cuando se lee a partir del byte 8 (int signed + 2 * short = 8 bytes) hasta la longitud que ocupa.
 * Al leer el buffer del cliente el servidor desempaqueta los diferentes datos.
 * Una vez los tiene ejecuta la función para saber el resultado de la operación y la envía al cliente.
 * Se ha automatizado el sistema para que cada 10 segundos el cliente genere dos valores aleatorios y un comando y los envie al servidor.
