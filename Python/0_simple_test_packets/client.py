@@ -25,6 +25,8 @@ def client():
             data = client_socket.recv(RECV_BUFFER)
             print data"""
         client_socket.send("Test Packet")
+        # Hasta que no se recibe una respuesta del servidor
+        # el cliente se queda en este bucle recv
         data = client_socket.recv(RECV_BUFFER)
         print data
         time.sleep(1);

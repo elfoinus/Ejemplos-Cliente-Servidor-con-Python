@@ -55,7 +55,9 @@ def server():
         c = Client()
         c.code = str(uuid.uuid4().fields[-1])[:5]
 
-        # En este momento aceptamos el socket
+        # El server se queda en el bucle server_socket.accept()
+        # hasta que se conecte un cliente y entonces se devuelven
+        # el socket y la direccion desde donde se ha conectado
         c.socket, c.addr = server_socket.accept()
 
         # Lo añadimos a una lista
