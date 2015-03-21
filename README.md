@@ -24,15 +24,15 @@ Ejemplo simple donde se crea un servidor capaz de solucionar varias operaciones 
 * A cada cliente se le otorga un identificador para diferenciarlo de los demás.
 * La gestión del socket de cada cliente se realiza en un hilo específico.
 * Cuando un cliente no responde o hay un error se cierra su socket.
-* Los paquetes se crean gracias a la librería **struct** y sus funciones para empaquetar y desempaquetar conjuntos de datos utilizando los formatos descritos en la [documentación] de la librería (https://docs.python.org/2/library/struct.html#format-characters).
-* El paquete que envía el cliente está formado por varias variables empaquetadas y una cadena de texto:
+* Los paquetes gestionan gracias a la librería **struct** y sus funciones para empaquetar y desempaquetar conjuntos de datos utilizando los formatos descritos en la [documentación](https://docs.python.org/2/library/struct.html#format-characters) de la librería.
+* El paquete que envía el cliente está formado por varias variables empaquetadas:
 	* Longitud del comando: Un entero con signo que ocupa 4 bytes.
 	* El primer valor: Un short que ocupa 2 bytes.
 	* El segundo valor: Un short que ocupa 2 bytes.
 * Al final del paquete (pero fuera del buffer del struct) se adjunta **el comando**, una string de tamaño indeterminado indicando SUMA, RESTA, MULTIPLICACION o DIVISION. 
 * Es muy interesante ver como se envía la cadena de carecteres fuera de un buffer de bytes.
-* Luego el servidor desempaqueta los diferentes datos.
-* Una vez tiene los datos ejecuta la función para saber el resultado de la operación y la envía al cliente.
+* Al leer el buffer del cliente el servidor desempaqueta los diferentes datos.
+* Una vez los tiene ejecuta la función para saber el resultado de la operación y la envía al cliente.
 * Se ha automatizado el sistema para que cada 10 segundos el cliente genere dos valores aleatorios y un comando y los envie al servidor.
 
 [![Imagen](https://github.com/hcosta/arquitectura-cliente-servidor/raw/master/Python/Screens/img2.png
