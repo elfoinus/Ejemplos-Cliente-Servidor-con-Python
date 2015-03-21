@@ -78,7 +78,7 @@ def handler(client):
                 print "Client " + client.code + " not found - Socket closed - Total clients: " + str(len(SOCKET_LIST))
                 break
             except: 
-                pass
+                break
 
     return
 
