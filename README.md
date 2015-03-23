@@ -48,7 +48,7 @@ Ejemplo en el que los clientes envían al servidor una coordenada (x,y) cada cie
 * Cuando un cliente no responde o hay un error se cierra su socket.
 * Desde el cliente se envía una coordenada en dos valores de tipo **short**, cada uno de 2bytes empaquetados con la librería struct. Se hace desde un hilo individual que ejecuta una función recursiva que altera las posiciones x e y -1,0,+1 aleatoriamente cada vez que se envía.
 * El resto del cliente queda en espera de ir leyendo el buffer local (con el broadcast).
-* Para gestionar el broadcast el servidor envía el paquete a todos los clientes utilizando un loop, y si alguno no funcionale cierra el socket.
+* Para gestionar el broadcast el servidor envía el paquete a todos los clientes utilizando un loop, y si alguno no funciona le cierra el socket.
 
 [![Imagen](https://github.com/hcosta/arquitectura-cliente-servidor/raw/master/Python/Screens/img3.png
 )](https://github.com/hcosta/arquitectura-cliente-servidor/raw/master/Python/Screens/img3.png)
