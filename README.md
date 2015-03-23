@@ -1,8 +1,6 @@
 # Arquitectura Cliente-Servidor
 
-Ejemplos de diferentes implementaciones en diferentes lenguajes aplicando principios comunes.
-
-## Python
+Ejemplos de diferentes implementaciones de un servidor en Python.
 
 ### [Simple tests packets](https://github.com/hcosta/arquitectura-cliente-servidor/tree/master/Python/0_simple_test_packets)
 
